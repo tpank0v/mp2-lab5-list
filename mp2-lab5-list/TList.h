@@ -5,6 +5,11 @@ struct TMonom
 {
 	double coeff;
 	int x, y, z;
+	TMonom();
+	TMonom(int x, int y, int z)
+	{
+
+	}
 	bool operator==(const TMonom& m)
 	{
 		if (x == m.x && y == m.y && z == m.z)
@@ -90,7 +95,7 @@ public:
 	void DelCuer();
 	T GetCuer();
 
-	void Revert();
+	void Reset();
 	void GoNext();
 
 	bool IsEnd();
@@ -207,7 +212,7 @@ template <class T>
 	}
 
 	template <class T>
-	void TList<T>::Revert()
+	void TList<T>::Reset()
 	{
 		pPrev = pStop;
 		pCuer = pFirst;
@@ -224,3 +229,88 @@ bool TList<T>::IsEnd()
 {
 	return pCuer == pStop;
 }
+
+
+
+template <class T>
+class THeadList:public TList<T>
+{
+protected:
+	TNode <T>* pHead;
+public:
+	THeadList();
+	~THeadList();
+	void InsFirst(T el);
+	void DelFirst(T el);
+};
+
+template <class T>
+THeadList<T>::THeadList()
+{
+	pHead = new TNode<T>;
+	pHerad->pNext = pHead;
+	len = 0;
+	pStop = pPrev = pCuer = pHead;
+}
+template <class T>
+THeadList<T>::~THeadList()
+{
+	while (pFirst != pStop)
+	{
+		TNode<T>* tmp = pFirst;
+		pFirst = pFirst->pNext;
+		delete tmp;
+	}
+	delete pHead;
+}
+template <class T>
+void THeadList<T>::InsFirst(T el)
+{
+	TList::InsFirst(el);
+	pHead ->pNext = pFirst;
+}
+template <class T>
+void THeadList<T>::DelFirst(T el)
+{
+	TList::DelFirst(el);
+	pHead->pNext = pFirst;
+}
+
+
+class TPolinom :public THeadList<TMonom>
+{
+public:
+	TPolinom():THeadList<TMonom>()
+	{
+		TMonom m;
+		m.x = 0; m.y = 0; m.y = -1;
+		pHead->val = m;
+	}
+
+	TPolinom(TPolinom& cp)
+	{
+		TMonom m(0, 0, -1);
+		pHead->val = m;
+		for (cp.Reset(); !cp.IsEnd(); cp.GoNext())
+		{
+			InsLast(cp.GetCuer());
+		}
+	}
+	void AddMonom(TMonom mon) 
+	{
+		Reset();
+		while (pCuer->val > mon)
+		{
+			GoNext();
+			if (pCuer->val == mon)
+			{
+				pCuer->val.coeff += mon.coeff;
+				if (pCuer->val.coeff == 0)
+					DelCuer;
+			}
+			else
+				InsCuer(mon);
+		}
+	}
+
+

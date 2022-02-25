@@ -9,20 +9,20 @@ void main()
 	l.InsFirst(3);
 	l.InsFirst(2);
 	l.InsFirst(1);
-	for (l.Revert(); !l.IsEnd(); l.GoNext())
+	for (l.Reset(); !l.IsEnd(); l.GoNext())
 	{
 		cout << l.GetCuer() << ' ';
 	}
 	cout << "\n";
 	l.InsLast(4);
-	for (l.Revert(); !l.IsEnd(); l.GoNext())
+	for (l.Reset(); !l.IsEnd(); l.GoNext())
 	{
 		cout << l.GetCuer() << ' ';
 	}
 	cout << "\n";
-	l.Revert();
+	l.Reset();
 	l.InsCuer(0);
-	for (l.Revert(); !l.IsEnd(); l.GoNext())
+	for (l.Reset(); !l.IsEnd(); l.GoNext())
 	{
 		cout << l.GetCuer() << ' ';
 	}
