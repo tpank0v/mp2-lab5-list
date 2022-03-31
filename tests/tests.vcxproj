@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{639d82ae-1ee1-4e04-b869-fd89232e7917}</ProjectGuid>
-    <RootNamespace>mp2lab5list</RootNamespace>
+    <ProjectGuid>{0a7b2e07-6c80-43de-8ee7-2f3db09714f7}</ProjectGuid>
+    <RootNamespace>tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,11 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="TList.h" />
-    <ClInclude Include="TMonom.h" />
+    <ClCompile Include="gtest-all.cc" />
+    <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="test_tpolinom.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClInclude Include="gtest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
