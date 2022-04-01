@@ -7,7 +7,17 @@ TEST(TMonom, CAN_CREATE_MONOM)
 {
 	ASSERT_NO_THROW(TMonom m);
 }
-
+TEST(TPolinom, CAN_CREATE_POLINOM)
+{
+	ASSERT_NO_THROW(TPolinom tp);
+}
+TEST(TPolinom, CAN_COPY_POLINOM)
+{
+	TPolinom tp;
+	tp.AddMonom(TMonom(1, 1, 1, 1));
+	TPolinom tp1(tp);
+	EXPECT_TRUE(tp == tp1);
+}
 TEST(TPolinom, CORRECT_COEFF_MULTIPLY)
 {
 	TPolinom tp1;
@@ -22,7 +32,6 @@ TEST(TPolinom, CORRECT_COEFF_MULTIPLY)
 	tp2.AddMonom(tm3);
 	EXPECT_TRUE((tp1 * 2) == tp2);
 }
-
 TEST(TPolinom, CAN_ASSIGN_POLINOM)
 {
 	TPolinom t1;
@@ -58,12 +67,14 @@ TEST(TPolinom, CAN_ADD_MONOM_TO_POLINOM)
 	TMonom tm(1, 1, 1, 1);
 	ASSERT_NO_THROW(t.AddMonom(tm));
 }
-TEST(TPolinom, CAN_ADD_POLINOM)
+TEST(TPolinom, CORRECT_ADD_POLINOM_TO_POLINOM)
 {
 	TPolinom t1;
 	TMonom tm(2, 1, 1, 1);
+
 	TMonom tm1(1, 1, 1, 1);
 	TMonom tm2(1, 2, 2, 2);
+
 
 	t1.AddMonom(tm1);
 	t1.AddMonom(tm2);
@@ -80,6 +91,104 @@ TEST(TPolinom, CAN_ADD_POLINOM)
 	res.AddMonom(tm3);
 
 	EXPECT_TRUE((t1+t2) == res);
+}
+TEST(TPolinom, CORRECT_ADD_POLINOM_TO_POLINOM_2)
+{
+	TPolinom t1;
+	TMonom tm(2, 1, 1, 1);
+	TMonom tm1(1, 1, 1, 1);
+
+	TMonom tm2(1, 2, 2, 2);
+	TMonom tm22(5, 2, 2, 2);
+
+	TMonom tm3(3, 3, 3, 3);
+	TMonom tm33(-3, 3, 3, 3);
+
+	t1.AddMonom(tm1);
+	t1.AddMonom(tm2);
+	t1.AddMonom(tm3);
+
+	TPolinom t2;
+
+	t2.AddMonom(tm1);
+	t2.AddMonom(tm22);
+	t2.AddMonom(tm33);
+
+	TPolinom res;
+
+	TMonom tm4(6, 2, 2, 2);
+	
+	res.AddMonom(tm);
+	res.AddMonom(tm4);
+
+
+	EXPECT_TRUE((t1 + t2) == res);
+}
+TEST(TPolinom, CORRECT_ADD_POLINOM_TO_POLINOM_3)
+{
+	TPolinom t1;
+	TMonom tm(-1, 1, 1, 1);
+
+	TMonom tm1(1, 1, 1, 1);
+	TMonom tm2(1, 2, 2, 2);
+	TMonom tm22(5, 2, 2, 2);
+	TMonom tm3(3, 3, 3, 3);
+	TMonom tm33(2, 3, 3, 3);
+
+
+	t1.AddMonom(tm);
+	t1.AddMonom(tm2);
+	t1.AddMonom(tm3);
+
+	TPolinom t2;
+
+	t2.AddMonom(tm1);
+	t2.AddMonom(tm22);
+	t2.AddMonom(tm33);
+
+	TPolinom res;
+
+	TMonom tm4(6, 2, 2, 2);
+	TMonom tm5(5, 3, 3, 3);
+
+	res.AddMonom(tm4);
+	res.AddMonom(tm5);
+
+
+	EXPECT_TRUE((t1 + t2) == res);
+}
+TEST(TPolinom, CORRECT_ADD_POLINOM_TO_POLINOM_4)
+{
+	TPolinom t1;
+	TMonom tm(2, 1, 1, 1);
+
+	TMonom tm1(1, 1, 1, 1);
+	TMonom tm2(-5, 2, 2, 2);
+	TMonom tm22(5, 2, 2, 2);
+	TMonom tm3(3, 3, 3, 3);
+	TMonom tm33(2, 3, 3, 3);
+
+	TMonom tm4(6, 2, 2, 2);
+	TMonom tm5(5, 3, 3, 3);
+
+
+	t1.AddMonom(tm);
+	t1.AddMonom(tm2);
+	t1.AddMonom(tm3);
+
+	TPolinom t2;
+
+	t2.AddMonom(tm1);
+	t2.AddMonom(tm22);
+	t2.AddMonom(tm33);
+
+	TPolinom res;
+
+	res.AddMonom(tm);
+	res.AddMonom(tm5);
+
+
+	EXPECT_TRUE((t1 + t2) == res);
 }
 TEST(TPolinom, CAN_MULTIPLY_MONOM_BY_POLINOM)
 {

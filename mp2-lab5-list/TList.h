@@ -27,7 +27,7 @@ public:
 
 	void Reset();
 	T GetCuer();
-	std::string ToStr() const;
+
 };
 
 template<class T>
@@ -173,10 +173,6 @@ bool TList<T>::IsEnd()
 template<class T>
 T TList<T>::GetCuer()
 {
-	if (pCuer == pStop)
-	{
-		throw "Barrier!";
-	}
 	return pCuer->val;
 }
 

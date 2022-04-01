@@ -15,11 +15,13 @@ struct TMonom
 		y = _y;
 		z = _z;
 	}
-	bool IsConst() const {
+	bool IsConst() const
+	{
 		return x == 0 && y == 0 && z == 0;
 	}
 
-	bool operator==(const TMonom& tm) {
+	bool operator==(const TMonom& tm)
+	{
 		return (x == tm.x) && (y == tm.y) && (z == tm.z);
 	}
 
